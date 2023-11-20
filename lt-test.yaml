@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  LTnishad:
+    Type: 'AWS::EC2::LaunchTemplate'
+    Properties:
+      LaunchTemplateName: !Sub '${AWS::StackName}-launch-template-for-testing-cspm'
+      LaunchTemplateData:
+        InstanceType: t2.micro
+        SecurityGroupIds:
+          - sg-0390a728fe71d50ca
+        KeyName: nishad-new-2022
+        ImageId: ami-026257f4f39c28af8
+        IamInstanceProfile:
+          Name: EC2-SSM-ROLE-Nishad
+        MetadataOptions:
+          HttpEndpoint: enabled
+          HttpPutResponseHopLimit: 1
+          HttpTokens: required
+      TagSpecifications:
+        - ResourceType: launch-template
+          Tags:
+            - Key: Name
+              Value: nishad-test
